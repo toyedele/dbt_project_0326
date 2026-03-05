@@ -1,9 +1,3 @@
--- normalise revenue to usd
--- subtract refunds from amount to get revenue
--- get sum but group by order_id and payment_status
--- Payment date must be >= order date. Returns failing rows.
--- Refund total for an order must not exceed what was paid.
-
 with fx_rates as (
     select * from {{ ref('tr_finance__fx_rates')}}
 ),
