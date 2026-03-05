@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: stg_users__customers
+    description: ""
+    columns:
+      - name: customer_id
+        data_type: varchar
+        description: ""
+        data_tests:
+          - unique
+          - not_null
+
+      - name: email
+        data_type: varchar
+        description: ""
+
+      - name: full_name
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+
+      - name: country
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+
+      - name: created_at
+        data_type: timestamp_ntz
+        description: ""
+
+      - name: updated_at
+        data_type: timestamp_ntz
+        description: ""
+
+      - name: marketing_opt_in
+        data_type: varchar
+        description: ""
+
+      - name: _source_file
+        data_type: varchar
+        description: ""
+
+      - name: _loaded_at
+        data_type: timestamp_ntz
+        description: ""
+

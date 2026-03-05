@@ -1,0 +1,93 @@
+version: 2
+
+models:
+  - name: tr_sales__order_items
+    description: "A transformed table of order items with calculated revenue and reversal flags."
+    columns:
+      - name: order_item_id
+        data_type: varchar
+        description: ""
+
+      - name: order_id
+        data_type: varchar
+        description: ""
+
+      - name: product_sku
+        data_type: varchar
+        description: ""
+
+      - name: product_name
+        data_type: varchar
+        description: ""
+
+      - name: quantity
+        data_type: number
+        description: ""
+
+      - name: unit_price
+        data_type: float
+        description: ""
+
+      - name: line_discount
+        data_type: float
+        description: ""
+
+      - name: revenue
+        data_type: float
+        description: ""
+
+      - name: reversals
+        data_type: boolean
+        description: ""
+
+  - name: tr_sales__orders
+    description: "A transformed table of orders with calculated net revenue and date dimensions for revenue analysis."
+    columns:
+      - name: order_id
+        data_type: varchar
+        description: ""
+
+      - name: customer_id
+        data_type: varchar
+        description: ""
+
+      - name: client_type
+        data_type: varchar
+        description: ""
+
+      - name: revenue_date
+        data_type: date
+        description: ""
+
+      - name: revenue_month
+        data_type: date
+        description: ""
+
+      - name: revenue_quarter
+        data_type: date
+        description: ""
+
+      - name: order_status
+        data_type: varchar
+        description: ""
+
+      - name: currency
+        data_type: varchar
+        description: ""
+
+      - name: order_total
+        data_type: float
+        description: ""
+
+      - name: shipping_amount
+        data_type: float
+        description: ""
+
+      - name: discount_amount
+        data_type: float
+        description: ""
+
+      - name: net_revenue
+        data_type: float
+        description: ""
+

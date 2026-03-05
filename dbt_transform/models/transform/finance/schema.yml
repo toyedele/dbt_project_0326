@@ -1,0 +1,120 @@
+version: 2
+
+models:
+  - name: tr_finance__fx_rates
+    description: "A transformed version of the stg_finance__fx_rates model, containing the latest exchange rates for each date and currency pair."
+    columns:
+      - name: calendar_date
+        data_type: date
+        description: ""
+
+      - name: base_currency
+        data_type: varchar
+        description: ""
+
+      - name: quote_currency
+        data_type: varchar
+        description: ""
+
+      - name: rate
+        data_type: float
+        description: ""
+
+  - name: tr_finance__payments
+    description: "A transformed version of the stg_transactions__payments model, containing enriched payment information with additional date dimensions and failure reasons."
+    columns:
+      - name: payment_id
+        data_type: varchar
+        description: ""
+
+      - name: order_id
+        data_type: varchar
+        description: ""
+
+      - name: attempt_number
+        data_type: number
+        description: ""
+
+      - name: payment_provider
+        data_type: varchar
+        description: ""
+
+      - name: payment_method
+        data_type: varchar
+        description: ""
+
+      - name: payment_status
+        data_type: varchar
+        description: ""
+
+      - name: amount
+        data_type: float
+        description: ""
+
+      - name: currency
+        data_type: varchar
+        description: ""
+
+      - name: created_at
+        data_type: timestamp_ntz
+        description: ""
+
+      - name: processed_at
+        data_type: timestamp_ntz
+        description: ""
+
+      - name: processed_date
+        data_type: date
+        description: ""
+
+      - name: processed_month
+        data_type: date
+        description: ""
+
+      - name: processed_quarter
+        data_type: date
+        description: ""
+
+      - name: failure_reason
+        data_type: varchar
+        description: ""
+
+  - name: tr_finance__refunds
+    description: "A transformed version of the stg_transactions__refunds model, containing enriched refund information with additional date dimensions."
+    columns:
+      - name: refund_id
+        data_type: varchar
+        description: ""
+
+      - name: payment_id
+        data_type: varchar
+        description: ""
+
+      - name: order_id
+        data_type: varchar
+        description: ""
+
+      - name: refund_amount
+        data_type: float
+        description: ""
+
+      - name: currency
+        data_type: varchar
+        description: ""
+
+      - name: reason
+        data_type: varchar
+        description: ""
+
+      - name: refunded_date
+        data_type: date
+        description: ""
+
+      - name: refunded_month
+        data_type: date
+        description: ""
+
+      - name: refunded_quarter
+        data_type: date
+        description: ""
+

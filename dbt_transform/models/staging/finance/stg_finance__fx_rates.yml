@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: stg_finance__fx_rates
+    description: ""
+    columns:
+      - name: calendar_date
+        data_type: date
+        description: ""
+        data_tests:
+          - not_null
+
+      - name: base_currency
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['USD']
+
+      - name: quote_currency
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+
+      - name: rate
+        data_type: float
+        description: ""
+        data_tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: source
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['ecb', 'internal']
+
+      - name: _source_file
+        data_type: varchar
+        description: ""
+
+      - name: _loaded_at
+        data_type: timestamp_ntz
+        description: ""
+

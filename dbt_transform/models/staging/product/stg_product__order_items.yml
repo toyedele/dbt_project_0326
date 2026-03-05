@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: stg_product__order_items
+    description: ""
+    columns:
+      - name: order_item_id
+        data_type: varchar
+        description: ""
+        data_tests:
+          - unique
+          - not_null
+
+      - name: order_id
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+
+      - name: product_sku
+        data_type: varchar
+        description: ""
+
+      - name: product_name
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+
+      - name: quantity
+        data_type: number
+        description: ""
+
+      - name: unit_price
+        data_type: float
+        description: ""
+        data_tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: line_discount
+        data_type: float
+        description: ""
+
+      - name: _source_file
+        data_type: varchar
+        description: ""
+
+      - name: _loaded_at
+        data_type: timestamp_ntz
+        description: ""
+

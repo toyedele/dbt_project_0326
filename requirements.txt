@@ -1,0 +1,7 @@
+# Install with: pip install -r requirements.txt
+
+snowflake-connector-python>=3.0.3  # For connecting to Snowflake
+# pandas>=1.5.3                      # For data manipulation
+python-dotenv>=1.0.0               # For managing environment variables
+dbt-snowflake>=1.5.2               # If dbt is used for Snowflake transformations
+loguru>=0.7.0                      # For advanced logging

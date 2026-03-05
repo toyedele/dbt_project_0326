@@ -1,0 +1,65 @@
+version: 2
+
+models:
+  - name: tr_marketing__clicks
+    description: "A transformed table of marketing clicks."
+    columns:
+      - name: click_id
+        data_type: varchar
+        description: ""
+
+      - name: customer_id
+        data_type: varchar
+        description: ""
+
+      - name: anonymous_id
+        data_type: varchar
+        description: ""
+
+      - name: client_type
+        data_type: varchar
+        description: ""
+
+      - name: channel
+        data_type: varchar
+        description: ""
+
+      - name: clicked_at
+        data_type: timestamp_ntz
+        description: ""
+
+      - name: campaign
+        data_type: varchar
+        description: ""
+
+      - name: utm_source
+        data_type: varchar
+        description: ""
+
+      - name: utm_medium
+        data_type: varchar
+        description: ""
+
+  - name: tr_marketing__customers
+    description: "A transformed table of customers with marketing opt-in status. This is an incremental model"
+    columns:
+      - name: customer_id
+        data_type: varchar
+        description: ""
+
+      - name: email
+        data_type: varchar
+        description: ""
+
+      - name: full_name
+        data_type: varchar
+        description: ""
+
+      - name: country
+        data_type: varchar
+        description: ""
+
+      - name: marketing_opt_in
+        data_type: boolean
+        description: ""
+

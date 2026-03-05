@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: raw
+    database: "{{ var('raw_database', 'RAW_DEV') }}"
+    schema: transactions
+    description: "Raw tables for transactions related data"
+    config:
+      freshness:
+        warn_after:  {count: 48, period: hour}
+        error_after: {count: 72, period: hour}
+      loaded_at_field: _loaded_at
+
+    tables:
+      - name: orders
+        description: "Raw order records"
+      - name: payments
+        description: "Raw payments records"
+      - name: refunds
+        description: "Raw refunds records"

@@ -1,0 +1,122 @@
+version: 2
+
+models:
+  - name: rpt_revenue
+    description: "A reporting table combining information from orders, payments, and refunds to provide a comprehensive view of revenue performance."
+    columns:
+      - name: revenue_date
+        data_type: date
+        description: ""
+
+      - name: revenue_month
+        data_type: date
+        description: ""
+
+      - name: revenue_quarter
+        data_type: date
+        description: ""
+
+      - name: order_id
+        data_type: varchar
+        description: ""
+
+      - name: customer_id
+        data_type: varchar
+        description: ""
+
+      - name: client_type
+        data_type: varchar
+        description: ""
+
+      - name: order_status
+        data_type: varchar
+        description: ""
+
+      - name: currency
+        data_type: varchar
+        description: ""
+
+      - name: net_revenue
+        data_type: float
+        description: ""
+
+      - name: normalised_revenue
+        data_type: float
+        description: ""
+
+      - name: product_id
+        data_type: varchar
+        description: ""
+
+      - name: product_name
+        data_type: varchar
+        description: ""
+
+      - name: country
+        data_type: varchar
+        description: ""
+
+      - name: marketing_opt_in
+        data_type: boolean
+        description: ""
+
+      - name: payment_provider
+        data_type: varchar
+        description: ""
+
+      - name: payment_status
+        data_type: varchar
+        description: ""
+
+      - name: payment_amount
+        data_type: float
+        description: ""
+
+      - name: normalised_payment_amount
+        data_type: float
+        description: ""
+
+      - name: payment_currency
+        data_type: varchar
+        description: ""
+
+      - name: processed_date
+        data_type: date
+        description: ""
+
+      - name: processed_month
+        data_type: date
+        description: ""
+
+      - name: processed_quarter
+        data_type: date
+        description: ""
+
+      - name: refund_amount
+        data_type: float
+        description: ""
+
+      - name: normalised_refund_amount
+        data_type: float
+        description: ""
+
+      - name: refund_currency
+        data_type: varchar
+        description: ""
+
+      - name: refund_reason
+        data_type: varchar
+        description: ""
+
+      - name: refunded_date
+        data_type: date
+        description: ""
+
+      - name: refunded_month
+        data_type: date
+        description: ""
+
+      - name: refunded_quarter
+        data_type: date
+        description: ""
+

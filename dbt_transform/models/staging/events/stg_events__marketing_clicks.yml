@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: stg_events__marketing_clicks
+    description: ""
+    columns:
+      - name: click_id
+        data_type: varchar
+        description: ""
+        data_tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        data_type: varchar
+        description: ""
+
+      - name: anonymous_id
+        data_type: varchar
+        description: ""
+
+      - name: channel
+        data_type: varchar
+        description: ""
+
+      - name: clicked_at
+        data_type: timestamp_ntz
+        description: ""
+        data_tests:
+          - not_null
+
+      - name: campaign
+        data_type: varchar
+        description: ""
+
+      - name: utm_source
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['facebook', 'newsletter', 'google', 'tiktok']
+
+      - name: utm_medium
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+
+      - name: _source_file
+        data_type: varchar
+        description: ""
+
+      - name: _loaded_at
+        data_type: timestamp_ntz
+        description: ""
+

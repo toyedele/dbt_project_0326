@@ -1,0 +1,63 @@
+version: 2
+
+models:
+  - name: stg_transactions__orders
+    description: ""
+    columns:
+      - name: order_id
+        data_type: varchar
+        description: ""
+        data_tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        data_type: varchar
+        description: ""
+
+      - name: order_created_at
+        data_type: timestamp_ntz
+        description: ""
+
+      - name: order_updated_at
+        data_type: timestamp_ntz
+        description: ""
+
+      - name: order_status
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+
+      - name: currency
+        data_type: varchar
+        description: ""
+
+      - name: order_total
+        data_type: float
+        description: ""
+        data_tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: shipping_amount
+        data_type: float
+        description: ""
+        data_tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: discount_amount
+        data_type: float
+        description: ""
+
+      - name: _source_file
+        data_type: varchar
+        description: ""
+
+      - name: _loaded_at
+        data_type: timestamp_ntz
+        description: ""
+

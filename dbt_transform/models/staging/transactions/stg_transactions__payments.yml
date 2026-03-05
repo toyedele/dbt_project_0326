@@ -1,0 +1,78 @@
+version: 2
+
+models:
+  - name: stg_transactions__payments
+    description: ""
+    columns:
+      - name: payment_id
+        data_type: varchar
+        description: ""
+        data_tests:
+          - unique
+          - not_null
+
+      - name: order_id
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+
+      - name: attempt_number
+        data_type: number
+        description: ""
+
+      - name: payment_provider
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+
+      - name: payment_method
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+
+      - name: payment_status
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['authorized', 'captured', 'failed', 'refunded', 'partially_refunded']
+
+      - name: amount
+        data_type: float
+        description: ""
+        data_tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: currency
+        data_type: varchar
+        description: ""
+        data_tests:
+          - not_null
+
+      - name: created_at
+        data_type: timestamp_ntz
+        description: ""
+
+      - name: processed_at
+        data_type: timestamp_ntz
+        description: ""
+
+      - name: failure_reason
+        data_type: varchar
+        description: ""
+
+      - name: _source_file
+        data_type: varchar
+        description: ""
+
+      - name: _loaded_at
+        data_type: timestamp_ntz
+        description: ""
+
