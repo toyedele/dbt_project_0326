@@ -1,0 +1,325 @@
+name: revenue_model
+description: >
+  Daily revenue analytics covering orders, payments, and refunds.
+  All monetary values are available in both original currency and normalised to USD.
+
+tables:
+  - name: RPT_REVENUE
+    description: >
+      A reporting table combining information from orders, payments, and refunds
+      to provide a comprehensive view of revenue performance.
+    base_table:
+      database: ANALYTICS
+      schema: ANALYTICS
+      table: RPT_REVENUE
+
+    time_dimensions:
+      - name: revenue_date
+        synonyms:
+          - "order date"
+        expr: REVENUE_DATE
+        data_type: DATE
+        description: Date the order revenue was recognised
+
+      - name: revenue_month
+        synonyms:
+          - "month of revenue"
+        expr: REVENUE_MONTH
+        data_type: DATE
+        description: Month of revenue recognition
+
+      - name: revenue_quarter
+        synonyms:
+          - "quarter of revenue"
+        expr: REVENUE_QUARTER
+        data_type: DATE
+        description: Quarter of revenue recognition
+
+      - name: processed_date
+        synonyms:
+          - "payment date"
+          - "payment processed date"
+        expr: PROCESSED_DATE
+        data_type: DATE
+        description: Date the payment was processed
+
+      - name: processed_month
+        synonyms:
+          - "month of payment"
+        expr: PROCESSED_MONTH
+        data_type: DATE
+        description: Month the payment was processed
+
+      - name: processed_quarter
+        synonyms:
+          - "quarter of payment"
+        expr: PROCESSED_QUARTER
+        data_type: DATE
+        description: Quarter the payment was processed
+
+      - name: refunded_date
+        synonyms:
+          - "refund date"
+          - "date of refund"
+        expr: REFUNDED_DATE
+        data_type: DATE
+        description: Date the refund was issued
+
+      - name: refunded_month
+        synonyms:
+          - "month of refund"
+        expr: REFUNDED_MONTH
+        data_type: DATE
+        description: Month the refund was issued
+
+      - name: refunded_quarter
+        synonyms:
+          - "quarter of refund"
+        expr: REFUNDED_QUARTER
+        data_type: DATE
+        description: Quarter the refund was issued
+
+    dimensions:
+      - name: order_id
+        synonyms:
+          - "order number"
+          - "order reference"
+        expr: ORDER_ID
+        data_type: VARCHAR
+        description: Unique order identifier
+        unique: true
+
+      - name: customer_id
+        synonyms:
+          - "customer"
+          - "customer reference"
+        expr: CUSTOMER_ID
+        data_type: VARCHAR
+        description: Unique customer identifier
+
+      - name: client_type
+        synonyms:
+          - "customer type"
+          - "type of client"
+        expr: CLIENT_TYPE
+        data_type: VARCHAR
+        description: Type of client that placed the order e.g. identified or anonymous guest
+
+      - name: order_status
+        synonyms:
+          - "status"
+          - "order state"
+        expr: ORDER_STATUS
+        data_type: VARCHAR
+        description: Current status of the order e.g. completed, cancelled
+
+      - name: order_currency
+        synonyms:
+          - "currency"
+          - "order currency code"
+        expr: CURRENCY
+        data_type: VARCHAR
+        description: Original currency the order was placed in
+
+      - name: product_id
+        synonyms:
+          - "sku"
+          - "product sku"
+        expr: PRODUCT_ID
+        data_type: VARCHAR
+        description: Product SKU
+
+      - name: product_name
+        synonyms:
+          - "product"
+          - "item"
+          - "item name"
+        expr: PRODUCT_NAME
+        data_type: VARCHAR
+        description: Human-readable product name
+
+      - name: country
+        synonyms:
+          - "customer country"
+          - "region"
+        expr: COUNTRY
+        data_type: VARCHAR
+        description: Customer country
+
+      - name: marketing_opt_in
+        synonyms:
+          - "opted in"
+          - "marketing consent"
+        expr: MARKETING_OPT_IN
+        data_type: boolean
+        description: Whether the customer has opted in to marketing
+
+      - name: payment_provider
+        synonyms:
+          - "provider"
+          - "payment processor"
+        expr: PAYMENT_PROVIDER
+        data_type: VARCHAR
+        description: Payment provider used e.g. Stripe, Adyen
+
+      - name: payment_status
+        synonyms:
+          - "payment outcome"
+          - "payment result"
+        expr: PAYMENT_STATUS
+        data_type: VARCHAR
+        description: Outcome of the payment attempt e.g. authorized, failed
+
+      - name: payment_currency
+        synonyms:
+          - "currency of payment"
+        expr: PAYMENT_CURRENCY
+        data_type: VARCHAR
+        description: Currency the payment was made in
+
+      - name: refund_currency
+        synonyms:
+          - "currency of refund"
+        expr: REFUND_CURRENCY
+        data_type: VARCHAR
+        description: Currency the refund was issued in
+
+      - name: refund_reason
+        synonyms:
+          - "reason for refund"
+          - "refund cause"
+        expr: REFUND_REASON
+        data_type: VARCHAR
+        description: Reason provided for the refund
+
+    facts:
+      - name: net_revenue
+        synonyms:
+          - "raw revenue"
+          - "revenue original currency"
+        expr: NET_REVENUE
+        data_type: NUMBER
+        description: >
+          Raw order revenue in original currency.
+          Avoid for cross-currency comparisons — use normalised_revenue instead.
+
+      - name: normalised_revenue
+        synonyms:
+          - "revenue usd"
+          - "revenue in dollars"
+          - "usd revenue"
+        expr: NORMALISED_REVENUE
+        data_type: NUMBER
+        description: >
+          Order revenue normalised to USD using the fx rate on revenue_date.
+          Always use this as the primary revenue metric.
+
+      - name: payment_amount
+        synonyms:
+          - "amount paid"
+          - "payment original currency"
+        expr: PAYMENT_AMOUNT
+        data_type: NUMBER
+        description: Raw payment amount in original payment currency.
+
+      - name: normalised_payment_amount
+        synonyms:
+          - "payment amount usd"
+          - "payment in dollars"
+        expr: NORMALISED_PAYMENT_AMOUNT
+        data_type: NUMBER
+        description: >
+          Payment amount normalised to USD using the fx rate on processed_date.
+
+      - name: refund_amount
+        synonyms:
+          - "amount refunded"
+          - "refund original currency"
+        expr: REFUND_AMOUNT
+        data_type: NUMBER
+        description: Raw refund amount in original refund currency.
+
+      - name: normalised_refund_amount
+        synonyms:
+          - "refund amount usd"
+          - "refund in dollars"
+        expr: NORMALISED_REFUND_AMOUNT
+        data_type: NUMBER
+        description: >
+          Refund amount normalised to USD using the fx rate on refunded_date.
+
+    metrics:
+      - name: total_revenue_usd
+        synonyms:
+          - "total revenue"
+          - "revenue"
+          - "gross revenue"
+        expr: SUM(NORMALISED_REVENUE)
+        description: >
+          Sum of normalised USD revenue across orders.
+          Use this as the primary top-line revenue metric.
+
+      - name: total_payment_amount_usd
+        synonyms:
+          - "total payments"
+          - "total collected"
+          - "total paid"
+        expr: SUM(NORMALISED_PAYMENT_AMOUNT)
+        description: Sum of normalised USD payment amounts.
+
+      - name: total_refunds_usd
+        synonyms:
+          - "total refunds"
+          - "refunded amount"
+          - "total refunded"
+        expr: SUM(NORMALISED_REFUND_AMOUNT)
+        description: Sum of normalised USD refund amounts.
+
+      - name: net_revenue_after_refunds_usd
+        synonyms:
+          - "net revenue"
+          - "revenue after refunds"
+          - "revenue net of refunds"
+        expr: SUM(COALESCE(NORMALISED_REVENUE, 0) - COALESCE(NORMALISED_REFUND_AMOUNT, 0))
+        description: >
+          Normalised USD revenue minus normalised USD refunds.
+          This is the cleanest top-line revenue metric.
+
+      - name: order_count
+        synonyms:
+          - "number of orders"
+          - "orders"
+          - "total orders"
+        expr: COUNT(DISTINCT ORDER_ID)
+        description: Count of unique orders.
+
+      - name: customer_count
+        synonyms:
+          - "number of customers"
+          - "unique customers"
+          - "total customers"
+        expr: COUNT(DISTINCT CUSTOMER_ID)
+        description: Count of unique customers.
+
+    filters:
+      - name: successful_payments_only
+        synonyms:
+          - "authorized payments"
+          - "successful orders"
+          - "completed payments"
+        expr: PAYMENT_STATUS = 'authorized'
+        description: Filters to successfully authorized payments only
+
+      - name: orders_with_refunds
+        synonyms:
+          - "refunded orders"
+          - "orders that were refunded"
+        expr: REFUND_AMOUNT IS NOT NULL
+        description: Filters to orders that had at least one refund
+
+      - name: marketing_opted_in
+        synonyms:
+          - "opted in customers"
+          - "marketing consented"
+        expr: MARKETING_OPT_IN = TRUE
+        description: Filters to customers who have opted in to marketing
